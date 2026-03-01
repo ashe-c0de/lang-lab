@@ -12,6 +12,7 @@ func main() {
 
 	// odd goroutine
 	go func() {
+		// odd channel遍历即是在接收数据，在未发送数据时无缓冲channel是阻塞的
 		for num := range odd {
 			fmt.Println("odd goroutine", num)
 			even <- num + 1
