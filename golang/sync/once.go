@@ -3,6 +3,7 @@ type Once struct {
 	m    Mutex       // 互斥锁
 }
 
+// Once实现单例的核心是：原子读取+doble check + mutex互斥锁
 func (o *Once) Do(f func()) {
 	// 【第一步】原子读取：快速路径 (Fast Path)
 	// 如果 done 已经是 1，直接返回，无需加锁。
