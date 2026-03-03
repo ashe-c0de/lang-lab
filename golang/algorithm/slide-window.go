@@ -20,7 +20,7 @@ func test(str string) int {
 	m := make(map[byte]int)
 	left := 0
 	res := 0
-
+	// 滑动窗口算法的核心就是，右指针给窗口扩容，直至抵达扩容限制条件或抵达边界；左指针则是给窗口缩容，以释放限制条件的约束，保证窗口继续向边界移动。
 	for right := 0; right < len(str); right++ {
 		if index, ok := m[str[right]]; ok && index >= left {
 			left = index + 1
