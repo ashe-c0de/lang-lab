@@ -41,6 +41,7 @@ func main() {
 	fmt.Println(isValid(s4))
 }
 
+// “括号匹配算法” (Parentheses Matching Algorithm)
 func isValid(str string) bool {
 	strLen := len(str)
 	if strLen%2 != 0 {
