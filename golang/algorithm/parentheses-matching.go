@@ -47,24 +47,22 @@ func isValid(str string) bool {
 	if strLen%2 != 0 {
 		return false
 	}
-	m := map[byte]byte{
+	hmap := map[byte]byte{
 		'(': ')', // 40 41
 		'{': '}',
 		'[': ']',
 	}
 
-	var stack []byte
-
-	for i := 0; i < strLen; i++ {
-		if v, ok := m[str[i]]; ok {
-			// 左括号 入栈
+	var stack []byte // 存放hmap的val,并在出栈时从末端截取（LIFO）
+	for i := 0; i < len(str); i++ {
+		if v, ok := hmap[str[i]]; ok {
+			// 入栈
 			stack = append(stack, v)
 		} else {
-			// 右括号 出栈，对比括号是否匹配，排除左括号出栈的特殊情况
 			if len(stack) == 0 || stack[len(stack)-1] != str[i] {
 				return false
 			}
-			// 截取最后一位（LIFO）,出栈
+			// 出栈
 			stack = stack[:len(stack)-1]
 		}
 	}
