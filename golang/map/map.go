@@ -1,7 +1,8 @@
 func main() {
 	// 创建map
 	myMap := make(map[string]any)
-
+	// var cache = map[string]any{}
+	
 	// 写
 	myMap["a"] = 1
 	myMap["b"] = 2
