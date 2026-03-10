@@ -15,13 +15,13 @@ import (
 */
 func main() {
 	var str0 = "1221"
-	//var str1 = "abcabcbb"
-	//var str2 = "你好世界红豆泥世界"
-	//var str3 = ""
-	fmt.Println(Do(str0))
-	//fmt.Println(Do(str1))
-	//fmt.Println(Do(str2))
-	//fmt.Println(Do(str3))
+	var str1 = "abcabcbb"
+	var str2 = "你好世界红豆泥世界"
+	var str3 = ""
+	fmt.Println(Do(str0)) // 2
+	fmt.Println(Do(str1)) // 3
+	fmt.Println(Do(str2)) // 7
+	fmt.Println(Do(str3)) // 0
 }
 
 // 滑动窗口的核心就是，右指针给窗口扩容，直至抵达扩容限制条件或抵达边界；左指针则是给窗口缩容，以释放限制条件的约束，保证窗口继续向边界移动。
@@ -30,8 +30,8 @@ func Do(str string) int {
 	slice := []rune(str)
 	m := make(map[rune]int) // key: 字符串字符, value: 字符所在字符串的index
 	for right := 0; right < len(slice); right++ {
-		// && val > left 是为了保持left是递增的，否则遇到重复字符left会变小进而res变大
-		if val, ok := m[slice[right]]; ok && val > left {
+		// && val >= left 是为了保持left是递增的，否则遇到重复字符left会变小进而res变大
+		if val, ok := m[slice[right]]; ok && val >= left {
 			// 重复字符，左窗口缩容
 			left = val + 1
 		}
