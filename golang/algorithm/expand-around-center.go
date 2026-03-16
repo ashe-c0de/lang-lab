@@ -53,6 +53,8 @@ func do(s string) string {
 			left--
 			right++
 		}
+		// 假设索引间隔n，那么字符串长度则n+1；比如[2, 4]（假设对应字符串为aba），区间长度2，而2，3，4对应元素个数是3。因此+1
+		// temp := (right - 1) - (left + 1) + 1
 		temp := right - left - 1
 		if temp > maxLen {
 			maxLen = temp
