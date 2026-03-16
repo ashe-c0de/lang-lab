@@ -1,33 +1,38 @@
-package main
+/*
+Given a string s, find the longest substring which is a palindrome. If there are multiple answers, then find the first appearing substring.
 
-import (
-	"fmt"
-)
 
+Input: s = "forgeeksskeegfor"
+Output: "geeksskeeg"
+Explanation: The longest substring that reads the same forward and backward is "geeksskeeg". Other palindromes like "kssk" or "eeksskee" are shorter.
+
+Input: s = "Geeks"
+Output: "ee"
+Explanation: The substring "ee" is the longest palindromic part in "Geeks". All others are shorter single characters.
+
+Input: s = "abc"
+Output: "a"
+Explanation: No multi-letter palindromes exist. So the first character "a" is returned as the longest palindromic substring.
+ */
 func main() {
 
-	s0 := "babad"
-	s1 := "abanoonttacxyzzzyx"
-	s2 := "bb"
+	s0 := ""
+	s1 := "forgeeksskeegfor"
+	s2 := "Geeks"
+	s3 := "abc"
+	s4 := "你好世界🤡🤡界世好你。。"
 
 	fmt.Println(do(s0))
 	fmt.Println(do(s1))
 	fmt.Println(do(s2))
+	fmt.Println(do(s3))
+	fmt.Println(do(s4))
 
 }
 
-/*
-aba → a|b|a
-abbd → a|b|b|d
-
-把字符间隙视作一个单位，那么aba奇数长度拥有偶数个间隙，abba偶数长度拥有奇数个间隙
-n长度的字符串总共单位即2*n-1
-
-中心扩展算法就是以此遍历字符+字符空隙。在每一次遍历过程中，通过左右双指针同时向两侧扩展，并校验是否符合回文规则
-当不符合时，左右指针之间的距离，即是某一字符作为回文中心时，回文子串的最大长度-1
-*/
 func do(s string) string {
-	n := len(s)
+	slice := []rune(s)
+	n := len(slice)
 
 	if n < 2 {
 		return s
@@ -43,7 +48,7 @@ func do(s string) string {
 		right := left + i%2
 
 		// inner for中校验回文规则，并由中心向两侧扩展
-		for left >= 0 && right < n && s[left] == s[right] {
+		for left >= 0 && right < n && slice[left] == slice[right] {
 			// 这里实际上又是摒弃了空隙的单位，因此最终right - left -1的结果不用除以2
 			left--
 			right++
@@ -55,5 +60,5 @@ func do(s string) string {
 			start = left + 1
 		}
 	}
-	return s[start : start+maxLen]
+	return string(slice[start : start+maxLen])
 }
