@@ -16,7 +16,7 @@ Explanation: No multi-letter palindromes exist. So the first character "a" is re
  */
 func main() {
 
-	s0 := ""
+	s0 := "abb"
 	s1 := "forgeeksskeegfor"
 	s2 := "Geeks"
 	s3 := "abc"
