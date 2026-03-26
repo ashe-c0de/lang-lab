@@ -33,9 +33,11 @@ func Execute(nums []int, k int) int {
 	m := make(map[int]int, len(nums))
 	m[0] = 1
 	for i := 0; i < len(nums); i++ {
-		// 计算前缀和
+		// 累加前缀和
 		pre += nums[i]
+		// 当前前缀和 - 历史前缀和 = 中间这段子数组的和  如果 历史前缀和 = 当前前缀和 - k，那么 中间这段子数组的和 必然等于 k
 		if v, ok := m[pre-k]; ok {
+			// 累加符合条件的case
 			res += v
 		}
 		// 存入哈希表，vlue为前缀和key所出现的次数
